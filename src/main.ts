@@ -1,8 +1,17 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import configuration from './config/configuration';
+import { ValidationPipe } from '@nestjs/common';
+// 安全性
+import helmet from 'helmet';
 
-async function bootstrap() {
+const bootstrap = async () => {
   const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
+  app.use(helmet());
+  app.useGlobalPipes(new ValidationPipe());
+  await app.listen(configuration.port);
 }
-bootstrap();
+
+bootstrap().then(() => {
+  console.log(`This serve running in port ${configuration.port}`);
+});
