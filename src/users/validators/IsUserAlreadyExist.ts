@@ -5,23 +5,23 @@ import {
   ValidatorConstraintInterface,
   ValidationArguments,
 } from 'class-validator';
-import { User } from '../user.entity';
+import { User } from '../users.entity';
 
 @ValidatorConstraint({ async: true })
 export class IsUserAlreadyExistConstraint
   implements ValidatorConstraintInterface {
-  async validate(username: string, _args: ValidationArguments) {
-    const user = await User.findOne({ username });
+  async validate(email: string, _args: ValidationArguments) {
+    const user = await User.findOne({ email });
     return !user;
   }
 
   defaultMessage() {
-    return 'User $value already exists. Choose another name.';
+    return 'Email $value already exists. Choose another name.';
   }
 }
 
-export function IsUserAlreadyExist(validationOptions?: ValidationOptions) {
-  return function(object: Object, propertyName: string) {
+export function IsEmailAlreadyExist(validationOptions?: ValidationOptions) {
+  return (object: Object, propertyName: string): any => {
     registerDecorator({
       target: object.constructor,
       propertyName: propertyName,

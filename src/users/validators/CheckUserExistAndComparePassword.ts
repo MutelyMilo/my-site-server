@@ -5,7 +5,7 @@ import {
   ValidatorConstraintInterface,
   ValidationArguments,
 } from 'class-validator';
-import { User } from '../user.entity';
+import { User } from '../users.entity';
 import bcrypt from 'bcrypt';
 
 @ValidatorConstraint({ async: true })
@@ -13,8 +13,8 @@ export class CheckUserExistAndComparePasswordConstraint
   implements ValidatorConstraintInterface {
   async validate(password: string, args: ValidationArguments) {
     const [relatedPropertyName] = args.constraints;
-    const username = (args.object as any)[relatedPropertyName];
-    const user = await User.findOne({ username });
+    const email = (args.object as any)[relatedPropertyName];
+    const user = await User.findOne({ email });
 
     if (user) {
       const match = await bcrypt.compare(password, user.password);

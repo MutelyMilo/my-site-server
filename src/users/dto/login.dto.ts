@@ -1,7 +1,7 @@
 import { IsNotEmpty } from 'class-validator';
 import { CheckUserExistAndComparePassword } from '../validators/CheckUserExistAndComparePassword';
 
-export class LoginInput {
+export class LoginDto {
   @IsNotEmpty()
   username: string;
 
