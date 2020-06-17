@@ -1,6 +1,6 @@
 import { IsEmail, MinLength, IsNotEmpty } from 'class-validator';
 import { IsEqual } from '../validators/IsEqual';
-import { IsEmailAlreadyExist } from '../validators/IsUserAlreadyExist';
+import { IsEmailAlreadyExist } from '../validators/IsEmailAlreadyExist';
 
 export class RegisterDto {
   @IsEmail()

@@ -1,11 +1,12 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsEmail, IsNotEmpty } from 'class-validator';
 import { CheckUserExistAndComparePassword } from '../validators/CheckUserExistAndComparePassword';
 
 export class LoginDto {
   @IsNotEmpty()
-  username: string;
+  @IsEmail()
+  email: string;
 
   @IsNotEmpty()
-  @CheckUserExistAndComparePassword('username')
+  @CheckUserExistAndComparePassword('email')
   password: string;
 }

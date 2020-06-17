@@ -15,7 +15,7 @@ export class CheckUserExistAndComparePasswordConstraint
     const [relatedPropertyName] = args.constraints;
     const email = (args.object as any)[relatedPropertyName];
     const user = await User.findOne({ email });
-
+  
     if (user) {
       const match = await bcrypt.compare(password, user.password);
       if (match) return true;

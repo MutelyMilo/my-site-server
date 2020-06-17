@@ -8,7 +8,7 @@ import {
 import { User } from '../users.entity';
 
 @ValidatorConstraint({ async: true })
-export class IsUserAlreadyExistConstraint
+export class IsEmailAlreadyExistConstraint
   implements ValidatorConstraintInterface {
   async validate(email: string, _args: ValidationArguments) {
     const user = await User.findOne({ email });
@@ -16,7 +16,7 @@ export class IsUserAlreadyExistConstraint
   }
 
   defaultMessage() {
-    return 'Email $value already exists. Choose another name.';
+    return 'Email $value already exists. Choose another email.';
   }
 }
 
@@ -27,7 +27,7 @@ export function IsEmailAlreadyExist(validationOptions?: ValidationOptions) {
       propertyName: propertyName,
       options: validationOptions,
       constraints: [],
-      validator: IsUserAlreadyExistConstraint,
+      validator: IsEmailAlreadyExistConstraint,
     });
   };
 }

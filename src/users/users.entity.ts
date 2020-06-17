@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import { Entity, Column, BeforeInsert, PrimaryColumn } from 'typeorm';
 import { Base } from '../common/base.entity';
+import { IsEmail } from 'class-validator';
 
 @Entity('users')
 export class User extends Base {
@@ -8,9 +9,10 @@ export class User extends Base {
   id: number
   
   @Column()
+  @IsEmail()
   email: string;
 
-  @Column()
+  @Column({ unique: true })
   username: string;
 
   @Column('varchar')
