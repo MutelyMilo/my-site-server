@@ -4,7 +4,6 @@ import { IsEmailAlreadyExist } from '../validators/IsEmailAlreadyExist';
 
 export class RegisterDto {
   @IsEmail()
-  @IsNotEmpty()
   @IsEmailAlreadyExist()
   email: string;
 

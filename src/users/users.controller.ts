@@ -3,8 +3,8 @@ import { User } from './users.entity';
 import { RegisterDto } from './dto/register.dto';
 import { Body, Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
 import { AuthService } from '../auth/auth.service';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { LocalAuthGuard } from '../auth/guards/local-auth.guard';
+import { LoginDto } from './dto/login.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('user')
 export class UsersController {
@@ -23,14 +23,13 @@ export class UsersController {
     return this.usersService.register(registerDto)
   }
   
-  @UseGuards(LocalAuthGuard)
   @Post('login')
-  async login(@Request() req: any) {
-    return this.authService.login(req.user);
+  async login(@Body() loginDto: LoginDto) {
+    return this.authService.login(loginDto);
   }
   
-  @UseGuards(JwtAuthGuard)
-  @Get('profile')
+  @UseGuards(AuthGuard('jwt'))
+  @Get('checkToken')
   getProfile(@Request() req: any) {
     return req.user;
   }
