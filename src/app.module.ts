@@ -6,6 +6,8 @@ import { AuthModule } from './auth/auth.module';
 // 渲染前端静态代码需要的
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { MessageBoardController } from './message-board/message-board.controller';
+import { MessageBoardModule } from './message-board/message-board.module';
 
 @Module({
   imports: [
@@ -15,8 +17,9 @@ import { join } from 'path';
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'client'),
     }),
+    MessageBoardModule,
   ],
-  controllers: [],
+  controllers: [MessageBoardController],
   providers: [],
   exports: []
 })

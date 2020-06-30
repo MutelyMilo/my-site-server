@@ -8,11 +8,11 @@ export class User extends Base {
   @PrimaryColumn()
   id: number
   
-  @Column()
+  @Column({ unique: true })
   @IsEmail()
   email: string;
 
-  @Column({ unique: true })
+  @Column()
   username: string;
 
   @Column('varchar')
