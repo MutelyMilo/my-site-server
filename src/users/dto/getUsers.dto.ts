@@ -1,4 +1,4 @@
-export class GetUsersInput {
+export class GetUsersDto {
   current?: string;
   pageSize?: string;
 }

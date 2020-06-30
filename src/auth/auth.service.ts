@@ -25,7 +25,7 @@ export class AuthService {
   async login(data: LoginDto) {
     const payload = { email: data.email, password: data.password };
     return {
-      token: jwt.sign(payload, configuration.auth.secretKey, { expiresIn: '100s' })
+      token: jwt.sign(payload, configuration.auth.secretKey, { expiresIn: '1d' })
     };
   }
 }

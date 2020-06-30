@@ -5,10 +5,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './users.entity';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthService } from '../auth/auth.service';
+import configuration from '../config/configuration';
 
 @Module({
   imports: [
-    JwtModule.register({ secret: 'hard!to-guess_secret' }),
+    JwtModule.register({ secret: configuration.auth.secretKey }),
     TypeOrmModule.forFeature([User])
   ],
   controllers: [UsersController],

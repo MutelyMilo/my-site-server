@@ -31,6 +31,7 @@ export class UsersController {
   @UseGuards(AuthGuard('jwt'))
   @Get('checkToken')
   getProfile(@Request() req: any) {
+    console.log(req);
     return req.user;
   }
 }

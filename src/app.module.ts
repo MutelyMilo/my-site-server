@@ -12,11 +12,11 @@ import { MessageBoardModule } from './message-board/message-board.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot(typeOrmConfig as TypeOrmModuleOptions),
-    UsersModule,
-    AuthModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'client'),
     }),
+    UsersModule,
+    AuthModule,
     MessageBoardModule,
   ],
   controllers: [MessageBoardController],
