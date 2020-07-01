@@ -3,6 +3,7 @@ import { Entity, Column, BeforeInsert, PrimaryColumn, OneToMany } from 'typeorm'
 import { Base } from '../common/base.entity';
 import { IsEmail } from 'class-validator';
 import { MessageBoardEntity } from '../message-board/message-board.entity';
+import { CommentEntity } from '../comment/comment.entity';
 
 @Entity('users')
 export class User extends Base {
@@ -16,7 +17,7 @@ export class User extends Base {
   @Column()
   username: string;
 
-  @Column('varchar')
+  @Column('varchar', { select: false })
   password: string;
   
   
@@ -25,6 +26,12 @@ export class User extends Base {
     message => message.user,
   )
   message: MessageBoardEntity[];
+  
+  @OneToMany(
+    () => CommentEntity,
+    comment => comment.user,
+  )
+  comment: CommentEntity[];
   
   @BeforeInsert()
   async hashPassword() {

@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryColumn, ManyToOne } from 'typeorm';
 import { Base } from '../common/base.entity';
 import { MessageBoardEntity } from '../message-board/message-board.entity';
+import { User } from '../users/users.entity';
 
 @Entity('comments')
 
@@ -13,8 +14,15 @@ export class CommentEntity extends Base {
   
   @ManyToOne(
     () => MessageBoardEntity,
-    message => message.comments,
+    message => message.comment,
     { eager: true },
   )
   message: MessageBoardEntity;
+  
+  @ManyToOne(
+    () => User,
+    user => user.message,
+    { eager: true },
+  )
+  user: User;
 }

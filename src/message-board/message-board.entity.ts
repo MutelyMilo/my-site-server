@@ -18,7 +18,7 @@ export class MessageBoardEntity extends Base {
   
   @OneToMany(
     () => CommentEntity,
-    comments => comments.message
+    comment => comment.message
   )
-  comments: CommentEntity
+  comment: CommentEntity[]
 }

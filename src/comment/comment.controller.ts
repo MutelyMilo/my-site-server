@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
 import { CommentService } from './comment.service';
 import { CommentEntity } from './comment.entity';
 import { AuthGuard } from '@nestjs/passport';
@@ -10,10 +10,14 @@ export class CommentController {
     private readonly commentService: CommentService
   ) {}
   
+  @Get()
+  async all(): Promise<CommentEntity[]> {
+    return this.commentService.all()
+  }
+  
   @UseGuards(AuthGuard('jwt'))
   @Post()
   async createComment(@Body() createCommentDto: CommentDto, @Request() req: any): Promise<CommentEntity> {
-    console.log(req);
-    return this.commentService.createComment(createCommentDto)
+    return this.commentService.createComment(createCommentDto, req.user)
   }
 }

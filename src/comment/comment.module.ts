@@ -9,7 +9,7 @@ import { CommentEntity } from './comment.entity';
 @Module({
   imports: [
     JwtModule.register({ secret: configuration.auth.secretKey }),
-    TypeOrmModule.forFeature([CommentEntity])
+    TypeOrmModule.forFeature([CommentEntity]),
   ],
   providers: [CommentService],
   controllers: [CommentController],
