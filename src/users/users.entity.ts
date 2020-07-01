@@ -19,14 +19,15 @@ export class User extends Base {
   @Column('varchar')
   password: string;
   
-  @BeforeInsert()
-  async hashPassword() {
-    this.password = await bcrypt.hash(this.password, 10);
-  }
   
   @OneToMany(
     () => MessageBoardEntity,
     message => message.user,
   )
   message: MessageBoardEntity[];
+  
+  @BeforeInsert()
+  async hashPassword() {
+    this.password = await bcrypt.hash(this.password, 10);
+  }
 }

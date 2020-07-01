@@ -1,6 +1,7 @@
 import { IsNotEmpty } from 'class-validator';
 
-export class CreateDto {
+
+export class CommentDto {
   @IsNotEmpty()
   body: string
 }

@@ -12,6 +12,10 @@ export class MessageBoardService {
     private readonly messageBoardEntityRepository: Repository<MessageBoardEntity>,
   ) {}
   
+  async all(): Promise<MessageBoardEntity[]> {
+    return this.messageBoardEntityRepository.find()
+  }
+  
   async create(createDto: CreateDto, user: User): Promise<MessageBoardEntity> {
     return this.messageBoardEntityRepository
       .create({
