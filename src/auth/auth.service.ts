@@ -12,6 +12,7 @@ export class AuthService {
   ) {}
 
   async validateUser(email: string, pass: string): Promise<any> {
+    console.log(123123123);
     const user = await this.usersService.findOne(email);
     if (!user) return
     const match = await bcrypt.compare(pass, user.password);
@@ -23,9 +24,8 @@ export class AuthService {
   }
 
   async login(data: LoginDto) {
-    const payload = { email: data.email, password: data.password };
     return {
-      token: jwt.sign(payload, configuration.auth.secretKey, { expiresIn: '1d' })
+      token: jwt.sign(data, configuration.auth.secretKey, { expiresIn: '1d' })
     };
   }
 }
