@@ -3,6 +3,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { RegisterDto } from './dto/register.dto';
 import { Injectable } from '@nestjs/common';
+import { LoginDto } from './dto/login.dto';
+import jwt from 'jsonwebtoken';
+import configuration from '../config/configuration';
 
 @Injectable()
 export class UsersService {
@@ -26,5 +29,12 @@ export class UsersService {
   async findOne(email: string): Promise<User | undefined> {
     const users = await this.usersRepository.find()
     return users.find(users => users.email === email);
+  }
+
+  async login(data: LoginDto) {
+    const payload = { email: data.email, password: data.password };
+    return {
+      token: jwt.sign(payload, configuration.auth.secretKey, { expiresIn: '1min' })
+    };
   }
 }

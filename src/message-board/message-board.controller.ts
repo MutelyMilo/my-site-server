@@ -16,16 +16,15 @@ export class MessageBoardController {
   constructor(
     private readonly messageBoardService: MessageBoardService,
   ) {}
-  
+
   @Get()
   async all(): Promise<MessageBoardEntity[]> {
     return this.messageBoardService.all()
   };
-  
+
   @UseGuards(AuthGuard('jwt'))
   @Post()
   async create(@Body() createDto: CreateDto, @Request() req: any): Promise<any> {
-    console.log(req);
     return this.messageBoardService.create(createDto, req.user)
   }
 }
