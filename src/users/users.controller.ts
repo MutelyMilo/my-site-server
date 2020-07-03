@@ -4,7 +4,8 @@ import { RegisterDto } from './dto/register.dto';
 import { Body, Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
 import { AuthService } from '../auth/auth.service';
 import { LoginDto } from './dto/login.dto';
-import { AuthGuard } from '@nestjs/passport';
+// import { AuthGuard } from '@nestjs/passport';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
 @Controller('user')
 export class UsersController {
@@ -17,21 +18,20 @@ export class UsersController {
   async all(): Promise<User[]> {
     return this.usersService.all()
   };
-  
+
   @Post('register')
   async register(@Body() registerDto: RegisterDto): Promise<User> {
     return this.usersService.register(registerDto)
   }
-  
+
   @Post('login')
   async login(@Body() loginDto: LoginDto) {
     return this.authService.login(loginDto);
   }
-  
-  @UseGuards(AuthGuard('jwt'))
+
+  @UseGuards(JwtAuthGuard)
   @Get('checkToken')
   getProfile(@Request() req: any) {
-    console.log(req);
     return req.user;
   }
 }
