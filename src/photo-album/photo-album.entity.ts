@@ -1,5 +1,6 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 import { Base } from '../common/base.entity';
+import { PhotosEntity } from '../photos/photos.entity';
 
 @Entity('photo-album')
 export class PhotoAlbumEntity extends Base {
@@ -9,4 +10,10 @@ export class PhotoAlbumEntity extends Base {
 
   @Column()
   coverUrl: string;
+
+  @OneToMany(
+    () => PhotosEntity,
+    photos => photos.photoAlbum,
+  )
+  photos: PhotosEntity[];
 }

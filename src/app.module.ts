@@ -9,6 +9,7 @@ import { PhotoAlbumModule } from './photo-album/photo-album.module';
 // 渲染前端静态代码需要的
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { PhotosModule } from './photos/photos.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { join } from 'path';
     MessageBoardModule,
     CommentModule,
     PhotoAlbumModule,
+    PhotosModule,
   ],
   controllers: [],
   providers: [],
