@@ -1,14 +1,14 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from '../users/users.service';
 import bcrypt from 'bcrypt';
 import { LoginDto } from '../users/dto/login.dto';
-import jwt from 'jsonwebtoken';
-import configuration from '../config/configuration';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly usersService: UsersService,
+    private jwtService: JwtService
   ) {}
 
   async validateUser(email: string, pass: string): Promise<any> {
@@ -18,6 +18,8 @@ export class AuthService {
       if (match) {
         const { password, ...result } = user;
         return result;
+      } else {
+        throw new UnauthorizedException("Password is wrong.");
       }
     }
     return null
@@ -26,7 +28,7 @@ export class AuthService {
   async login(data: LoginDto) {
     const payload = { email: data.email, password: data.password };
     return {
-      token: jwt.sign(payload, configuration.auth.secretKey, { expiresIn: '1d' })
+      token: this.jwtService.sign(payload)
     };
   }
 }

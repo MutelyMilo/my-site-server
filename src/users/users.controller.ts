@@ -6,6 +6,7 @@ import { AuthService } from '../auth/auth.service';
 import { LoginDto } from './dto/login.dto';
 // import { AuthGuard } from '@nestjs/passport';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { LocalAuthGuard } from '../auth/local-auth.guard';
 
 @Controller('user')
 export class UsersController {
@@ -24,6 +25,7 @@ export class UsersController {
     return this.usersService.register(registerDto)
   }
 
+  @UseGuards(LocalAuthGuard)
   @Post('login')
   async login(@Body() loginDto: LoginDto) {
     return this.authService.login(loginDto);
@@ -31,7 +33,7 @@ export class UsersController {
 
   @UseGuards(JwtAuthGuard)
   @Get('checkToken')
-  getProfile(@Request() req: any) {
+  checkToken(@Request() req: any) {
     return req.user;
   }
 }
