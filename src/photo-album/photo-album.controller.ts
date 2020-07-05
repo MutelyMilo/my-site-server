@@ -1,6 +1,8 @@
-import { Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post } from '@nestjs/common';
 import { PhotoAlbumService } from './photo-album.service';
 import { PhotoAlbumEntity } from './photo-album.entity';
+import { CreatePhotoAlbumDto } from './dto/createPhotoAlbum.dto';
+import { DeletePhotoAlbumDto } from './dto/deletePhotoAlbum.dto';
 
 @Controller('photo-album')
 export class PhotoAlbumController {
@@ -14,7 +16,12 @@ export class PhotoAlbumController {
   }
 
   @Post()
-  async create(): Promise<PhotoAlbumEntity> {
-    return this.photoAlbumService.create();
+  async create(@Body() createPhotoAlbumDto: CreatePhotoAlbumDto): Promise<PhotoAlbumEntity> {
+    return this.photoAlbumService.create(createPhotoAlbumDto);
+  }
+
+  @Delete()
+  async delete(@Body() deletePhotoAlbumDto: DeletePhotoAlbumDto): Promise<PhotoAlbumEntity> {
+    return this.photoAlbumService.delete(deletePhotoAlbumDto);
   }
 }

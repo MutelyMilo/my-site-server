@@ -16,6 +16,8 @@ const bootstrap = async () => {
   app.useGlobalPipes(new ValidationPipe());
   // 全局注册拦截器
   app.useGlobalInterceptors(new TransformInterceptor());
+  // 全局路由前缀
+  app.setGlobalPrefix('api/v1');
   // 拦截所有错误统一格式
   // app.useGlobalFilters(new HttpExceptionFilter());
   await app.listen(configuration.port);
