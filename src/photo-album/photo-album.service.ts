@@ -13,14 +13,17 @@ export class PhotoAlbumService {
   ) {}
 
   async all(): Promise<PhotoAlbumEntity[]> {
-    return this.photoAlbumEntityRepository.find();
+    return await this.photoAlbumEntityRepository.find();
   }
 
   async create(createPhotoAlbumDto: CreatePhotoAlbumDto): Promise<PhotoAlbumEntity> {
-    return this.photoAlbumEntityRepository.create(createPhotoAlbumDto).save()
+    return await this.photoAlbumEntityRepository.create(createPhotoAlbumDto).save()
   }
 
   async delete(deletePhotoAlbumDto: DeletePhotoAlbumDto): Promise<any> {
-    return this.photoAlbumEntityRepository.delete(deletePhotoAlbumDto.id)
+    await this.photoAlbumEntityRepository.delete(deletePhotoAlbumDto)
+    return {
+      message: "Delete success."
+    }
   }
 }
