@@ -9,7 +9,7 @@ export class PhotosEntity extends Base {
   name: string;
 
   @Column()
-  coverUrl: string;
+  url: string;
 
   @ManyToOne(
     () => PhotoAlbumEntity,

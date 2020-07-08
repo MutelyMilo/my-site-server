@@ -4,7 +4,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PhotoAlbumController } from './photo-album.controller';
 import { PhotoAlbumService } from './photo-album.service';
 
-
 @Module({
   imports: [
     TypeOrmModule.forFeature([PhotoAlbumEntity])

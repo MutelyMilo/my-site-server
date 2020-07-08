@@ -1,9 +1,11 @@
 import { UsersService } from './users.service';
 import { User } from './users.entity';
-import { RegisterDto } from './dto/register.dto';
-import { Body, Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
+import { CreateUserDto } from './dto/createUser.dto';
+import { Body, Controller, Delete, Get, Patch, Post, Request, UseGuards } from '@nestjs/common';
 import { LoginDto } from './dto/login.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { UpdateDto } from './dto/update.dto';
+import { DeleteUserDto } from './dto/deleteUser.dto';
 
 @Controller('user')
 export class UsersController {
@@ -17,7 +19,7 @@ export class UsersController {
   };
 
   @Post('register')
-  async register(@Body() registerDto: RegisterDto): Promise<User> {
+  async register(@Body() registerDto: CreateUserDto): Promise<User> {
     return this.usersService.register(registerDto)
   }
 
@@ -27,8 +29,22 @@ export class UsersController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Patch()
+  async update(@Body() updateDto: UpdateDto, @Request() req: { user: User }) {
+    const id = req.user.id;
+    console.log(id);
+    return this.usersService.update(id, updateDto);
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Get('checkToken')
-  getProfile(@Request() req: any) {
+  getProfile(@Request() req: { user: User }) {
     return req.user;
+  }
+
+  @Delete()
+  deleteUser(@Body() deleteUserDto: DeleteUserDto) {
+    console.log(deleteUserDto);
+    return this.usersService.deleteUser(deleteUserDto)
   }
 }
