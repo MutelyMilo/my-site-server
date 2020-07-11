@@ -16,7 +16,7 @@ export class IsPhotoAlbumIdAlreadyExistConstraint
   }
 
   defaultMessage() {
-    return 'Photo album Id $value is not exist, please check it.';
+    return 'Photo album ID is not exist, please check it.';
   }
 }
 

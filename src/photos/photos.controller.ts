@@ -1,6 +1,7 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Post } from '@nestjs/common';
 import { CreatePhotoDto } from './dto/createPhoto.dto';
 import { PhotosService } from './photos.service';
+import { DeletePhotoDto } from './dto/deletePhoto.dto';
 
 @Controller('photos')
 export class PhotosController {
@@ -9,7 +10,12 @@ export class PhotosController {
   ) {}
 
   @Post()
-  async create(@Body() createPhotoDto: CreatePhotoDto, photoAlbumId: number) {
-    return await this.photosService.create(createPhotoDto, photoAlbumId)
+  async create(@Body() createPhotoDto: CreatePhotoDto) {
+    return await this.photosService.create(createPhotoDto)
+  }
+
+  @Delete()
+  async delete(@Body() deletePhotoDto: DeletePhotoDto) {
+    return await this.photosService.delete(deletePhotoDto)
   }
 }

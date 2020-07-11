@@ -14,7 +14,10 @@ export class PhotosEntity extends Base {
   @ManyToOne(
     () => PhotoAlbumEntity,
     photoAlbum => photoAlbum.photos,
-    { eager: true },
+    {
+      eager: true,
+      onDelete: 'CASCADE',
+    },
   )
   photoAlbum: PhotoAlbumEntity;
 }

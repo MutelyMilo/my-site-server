@@ -13,7 +13,7 @@ export class PhotoAlbumService {
   ) {}
 
   async all(): Promise<PhotoAlbumEntity[]> {
-    return await this.photoAlbumEntityRepository.find();
+    return await this.photoAlbumEntityRepository.find({relations: ["photos"]});
   }
 
   async create(createPhotoAlbumDto: CreatePhotoAlbumDto): Promise<PhotoAlbumEntity> {
