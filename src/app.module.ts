@@ -13,6 +13,7 @@ import { PhotoAlbumModule } from './photo-album/photo-album.module';
 import { PhotosModule } from './photos/photos.module';
 import { NotesModule } from './notes/notes.module';
 import { NoteTypeModule } from './note-type/note-type.module';
+import { QiniuTokenModule } from './qiniu-token/qiniu-token.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { NoteTypeModule } from './note-type/note-type.module';
     PhotosModule,
     NotesModule,
     NoteTypeModule,
+    QiniuTokenModule,
   ],
   controllers: [],
   providers: [],
