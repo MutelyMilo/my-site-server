@@ -2,8 +2,8 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import {typeOrmConfig} from 'src/config/typeORM'
 // 渲染前端静态代码需要的
-import { ServeStaticModule } from '@nestjs/serve-static';
-import { join } from 'path';
+// import { ServeStaticModule } from '@nestjs/serve-static';
+// import { join } from 'path';
 // Modules
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
@@ -18,9 +18,9 @@ import { QiniuTokenModule } from './qiniu-token/qiniu-token.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot(typeOrmConfig as TypeOrmModuleOptions),
-    ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'client'),
-    }),
+    // ServeStaticModule.forRoot({
+    //   rootPath: join(__dirname, '..', '/'),
+    // }),
     UsersModule,
     AuthModule,
     MessageBoardModule,

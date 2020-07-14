@@ -17,7 +17,7 @@ export default {
       type: process.env.DB_TYPE || 'mysql',
       port: process.env.DB_PORT || 3306,
       username: process.env.DB_USERNAME || 'root',
-      password: process.env.DB_PASSWORD || '77777777',
+      password: process.env.DB_PASSWORD || 'Milo@482642',
       database:
         (isTestEnvironment ? process.env.TEST_DB_NAME : process.env.DB_NAME) ||
         'mydb',
